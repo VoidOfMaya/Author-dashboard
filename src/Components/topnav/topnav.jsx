@@ -7,7 +7,6 @@ const ifUser =(user, logout)=>{
     if(user){
         return(
             <>
-                <NavLink to={'/dashboard'}>Dashboard</NavLink>
                 <button type='button'
                 onClick={e=>{
                     e.preventDefault();

@@ -58,6 +58,8 @@ function Dashboard(){
                 </div>
                 {populatePosts(posts)};
             </div>
+
+            <button type="button">create Post</button>
         </section>
     )
 }
