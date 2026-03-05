@@ -11,24 +11,28 @@ function Dashboard(){
     const{user, token} = useOutletContext();
 
     useEffect(()=>{
-        fetch('https://blog-api-vdtu.onrender.com/post/All',{
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-            },
-        })
-        .then(response=>{
-        if(response.status >= 400) {
-            throw new Error('A server error has occured error code: ' + response.status )
+        try{
+            fetch('https://blog-api-vdtu.onrender.com/post/All',{
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+            .then(response=>{
+            if(response.status >= 400) {
+                throw new Error('A server error has occured error code: ' + response.status )
+            }
+            return response.json();
+            })
+            .then( data =>{
+                setPosts(data.result)
+            })
+            .catch(error => console.error(error))
+            .finally(()=> {setLoading(false)});
+        }catch(err){
+            console.log(err)
         }
-        return response.json();
-        })
-        .then( data =>{
-            setPosts(data.result)
-        })
-        .catch(error => console.error(error))
-        .finally(()=> {setLoading(false)});
 
     },[])
     //console.log(posts)

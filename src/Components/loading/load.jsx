@@ -8,6 +8,14 @@ const Loading = () =>{
         </div>
     )
 }
+const ButtonLoading = () =>{
+    return(
+        <>
+            <img src={load} alt='Loading...' className={style.loader}></img>         
+        </>
+    )
+}
 export{
-    Loading
+    Loading,
+    ButtonLoading
 }
