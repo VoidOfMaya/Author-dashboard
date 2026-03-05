@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Loading } from "../loading/load";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import style from './dashboard.module.css'
 import { PostCard } from "../postCard.jsx/postCard";
 
@@ -56,10 +56,10 @@ function Dashboard(){
                     <div className={style.published}>PUBLISH STATUS</div>
                     <div className={style.opts}>OPTIONS</div>
                 </div>
-                {populatePosts(posts)};
+                {populatePosts(posts)}
             </div>
 
-            <button type="button">create Post</button>
+            <Link to={'/createPost'}>newPost +</Link>
         </section>
     )
 }

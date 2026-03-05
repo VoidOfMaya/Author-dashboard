@@ -18,15 +18,15 @@ function PostCard({post}){
             <div className={style.opts}>
                 {!post.isPublished? (
                     <div className={style.pendingOpts}>
-                        <button type='button'><h5>PUBLISH</h5></button>
-                        <button type='button'><h5>DELETE</h5></button>
-                        <button type='button'><h5>EDIT</h5></button>                    
+                        <button type='button'>PUBLISH</button>
+                        <button type='button'>DELETE</button>
+                        <button type='button'>EDIT</button>                    
                     </div>
                    
                 ):(
                     <div className={style.publishedOpts}>
-                    <button type='button'><h5>DELETE</h5></button>
-                    <button type='button'><h5>EDIT</h5></button>                    
+                    <button type='button'>DELETE</button>
+                    <button type='button'>EDIT</button>                    
                     </div>
                 )}
 

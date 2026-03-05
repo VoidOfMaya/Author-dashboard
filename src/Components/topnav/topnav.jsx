@@ -6,7 +6,10 @@ import style from './topnav.module.css'
 const ifUser =(user, logout)=>{
     if(user){
         return(
+            
             <>
+                <NavLink to={'/createPost'}>New post</NavLink>
+                <NavLink to={'/dashboard'}>Dashboard</NavLink>
                 <button type='button'
                 onClick={e=>{
                     e.preventDefault();

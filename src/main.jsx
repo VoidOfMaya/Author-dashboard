@@ -7,6 +7,7 @@ import App from './App.jsx'
 import { LoginPage } from './Components/login/loginPage.jsx'
 import { NotFound } from './Components/404-page/notFound.jsx'
 import { Dashboard } from './Components/dashboard/dashboard.jsx'
+import { CreatePost } from './Components/createPost/createPost.jsx'
 
 
 const router =createBrowserRouter([
@@ -14,7 +15,7 @@ const router =createBrowserRouter([
     children: [
     { path: '/', element: <LoginPage/>},
     {path:'/dashboard', element: <Dashboard />},
-    //{path:'/createPost', element: <create />}
+    {path:'/createPost', element: <CreatePost/>}
 
     ],
     errorElement:<NotFound />},
