@@ -23,6 +23,10 @@ function LoginPage(){
             localStorage.setItem("token", data.user.token);
             localStorage.setItem("user", JSON.stringify(data.user.user));
 
+            if(data.user.user.roleId === 1){
+                throw new Error('Unauthorized access: user not an Author')
+            }
+            console.log(data.user.user)
             onLoginSuccess(data.user.user, data.user.token) 
             redirectTo("/")           
         }catch(err){

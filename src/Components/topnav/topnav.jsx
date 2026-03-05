@@ -7,6 +7,12 @@ const ifUser =(user, logout)=>{
         return(
             <>
                 <h3>logged in links</h3>
+                <button type='button'
+                onClick={e=>{
+                    e.preventDefault();
+                    logout();
+                }}
+                >logout</button>
             </>
         )
 
@@ -18,11 +24,11 @@ const ifUser =(user, logout)=>{
         )            
     }
 }
-const NavBar = (user , logout) =>{
-    //const userdata = JSON.parse(user)
+const NavBar = ({user , logout}) =>{
+    const userdata = JSON.parse(user)
     return(
         <div className={style.topnav}>
-            <h1 className={style.title}>DevLog <div className={style.titleRout}>/{user? user.firstName : ''}/Dashboard </div></h1>
+            <h1 className={style.title}>DevLog <div className={style.titleRout}>/{user? userdata.firstName : ''}/Dashboard </div></h1>
             <div className={style.NavLinks}>
                 {ifUser(user,logout)}
             </div>

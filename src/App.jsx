@@ -18,7 +18,6 @@ function App() {
     setAuth({token: token, user: user});
     
   }
-
   return (
     <>
       <NavBar user={auth.user} logout={onLogout}/>
