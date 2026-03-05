@@ -1,0 +1,31 @@
+.postList{
+    margin-top: 3em;
+    border-bottom: 1px solid black;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows:  auto-fill;
+}
+.tableHeaders{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 2fr 3fr;
+    grid-template-rows: 1fr auto-fill;
+
+    grid-template-areas:
+    'id name creation published opts' 
+    ;
+}
+.id{
+ grid-area: id;
+}
+.name{
+ grid-area: name;
+}
+.creation{
+ grid-area: creation;
+}
+.published{
+ grid-area: published;
+}
+.opts{
+ grid-area: opts;
+}

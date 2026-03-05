@@ -28,7 +28,7 @@ function LoginPage(){
             }
             console.log(data.user.user)
             onLoginSuccess(data.user.user, data.user.token) 
-            redirectTo("/")           
+            redirectTo("/dashboard")           
         }catch(err){
             console.log(err)
         }

@@ -12,6 +12,7 @@ function App() {
   const onLogout= ()=>{
     localStorage.clear();
     setAuth({token: '', user: null});
+    
   }
 
   const onLoginSuccess= (user, token) =>{

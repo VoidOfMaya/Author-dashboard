@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import style from './topnav.module.css'
 
 
@@ -6,7 +7,7 @@ const ifUser =(user, logout)=>{
     if(user){
         return(
             <>
-                <h3>logged in links</h3>
+                <NavLink to={'/dashboard'}>Dashboard</NavLink>
                 <button type='button'
                 onClick={e=>{
                     e.preventDefault();
@@ -19,7 +20,7 @@ const ifUser =(user, logout)=>{
     }else{
         return(
             <>
-                <h3>logged out links</h3>
+                <NavLink to={'/'}>log in</NavLink>
             </>
         )            
     }
