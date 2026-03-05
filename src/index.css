@@ -1,68 +1,133 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/*Global reseter*/
+*,
+*::before,
+*::after {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-h1 {
-  font-size: 3.2em;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul,
+ol {
+  list-style: none;
+}
+input,
+button,
+textarea,
+select {
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: normal;
   line-height: 1.1;
 }
-
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+/* Remove button borders in some browsers */
+button:focus {
+  outline: none;
+}
+/* Remove input styles */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: none;
+}
+/* Remove form element spacing */
+input,
+textarea,
+select,
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  margin: 0;
+  padding: 0;
+}
+/* Set a sensible default font */
+body {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+}
+/* Set default background color for HTML */
+html {
+  background-color: #fff;
+}
+/* Reset vertical alignment issues in flexbox */
+figcaption,
+figure,
+main {
+  display: block;
+}
+/* Allow elements to take up full width */
+* {
+  width: 100%;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* Normalize the `button` element to inherit styles from its parent */
+button {
+  background: none;
   cursor: pointer;
-  transition: border-color 0.25s;
+  padding: 0;
 }
-button:hover {
-  border-color: #646cff;
+/* Global scroll behavior */
+html {
+  scroll-behavior: smooth;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Basic box-shadow reset (to remove default shadows in browsers like Firefox) */
+* {
+  box-shadow: none;
 }
+/* Remove appearance for form elements in webkit browsers */
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+/* Prevent extra spacing around elements that are empty or have inline-block display */
+span,
+i,
+strong,
+b {
+  display: inline-block;
+}
+ /*=================================*/
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.appContainer{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color:#F8F9FA ;
+}
+.pageContainer{
+  flex: 1;           
+  overflow-x: hidden;
 }

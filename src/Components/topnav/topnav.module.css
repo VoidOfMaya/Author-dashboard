@@ -1,0 +1,43 @@
+.navBar{
+
+}
+.topnav{
+    border-bottom: 1px solid rgb(187, 187, 187);
+    box-shadow: 0px 16px 24px -24px rgb(163, 165, 192);
+    background-color: rgb(245, 245, 245);
+    padding: 20px;
+    display: flex;
+    justify-items: end;
+
+}
+.titleAccessory{
+    display: inline;
+    color: rgb(238, 236, 236);
+    font-size: 42px;
+}
+.title{
+    flex: 3;
+    text-align: start;
+}
+.titleRout{
+    display: inline;
+    color: rgb(176, 176, 177);
+}
+.NavLinks{
+    display: flex;
+    flex: 2;
+    gap: 5px;
+}
+.navButton{
+
+    align-self: center;
+    transform: scale(1);
+    transition: .3s ease ;
+    padding: 10px 0px 10px 0px;
+    border-radius: 20px;
+}
+.navButton:hover{
+    background-color:rgb(238, 236, 236) ;
+    transform: scale(1.2);
+    z-index: 1;
+}

@@ -1,0 +1,19 @@
+.loginPage{
+    margin-top: 20px;
+}
+.loginContainer{
+    outline: 1px solid black ;
+    max-width: 600px;
+    justify-self: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+input{
+    outline: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    margin: 20px 0px 20px 0px;
+    border-radius: 5px;
+    background-color: rgb(243, 243, 243);
+}
