@@ -9,7 +9,6 @@ function Dashboard(){
     const [posts, setPosts] = useState();
 
     const{user, token} = useOutletContext();
-
     useEffect(()=>{
         try{
             fetch('https://blog-api-vdtu.onrender.com/post/All',{
