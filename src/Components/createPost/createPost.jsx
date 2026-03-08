@@ -1,13 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 import { Editor } from '@tinymce/tinymce-react'
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { ButtonLoading } from '../loading/load.jsx'
 function CreatePost(){
     const { token } = useOutletContext();
     const [post, setPost]= useState({title: '', content: ''})
     const [submition,setSubmition]= useState(false)
     const [isLoading, setIsLoading] = useState(false)
-
+    const redirect = useNavigate();
 
     const editRef = useRef(null);
     
@@ -39,7 +39,10 @@ function CreatePost(){
         return response.json();
         })
         .catch(error => console.error(error))
-        .finally(()=> setIsLoading(false));
+        .finally(()=> {
+            setIsLoading(false)
+            redirect('/dashboard')
+        });
         
     }catch(err){
         console.log(err)
