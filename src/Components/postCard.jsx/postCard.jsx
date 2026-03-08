@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 function PostCard({post, publish}){
     const [isLoading, setIsLoading] = useState(false)
-    const {token} = useOutletContext();
+    const {token, handlePostData } = useOutletContext();
     const redirect = useNavigate();
 
     const reformatDate =(date)=>{
@@ -75,13 +75,20 @@ function PostCard({post, publish}){
                     <div className={style.pendingOpts}>
                         <button type='button' onClick={()=>onPublish(post.id)}>PUBLISH</button> 
                         <button type='button' onClick={()=>deletePost(post.id)}>DELETE</button>
-                        <button type='button'>EDIT</button>                    
+                        <button type='button' onClick={()=>{
+                            handlePostData(post.id, post.title, post.content)
+                            redirect('/editPost')
+                            }
+                        }>EDIT</button>                    
                     </div>
                    
                 ):(
                     <div className={style.publishedOpts}>
                     <button type='button' onClick={()=>deletePost(post.id)}>DELETE</button>
-                    <button type='button'>EDIT</button>                    
+                    <button type='button'onClick={()=>{
+                        handlePostData(post.id, post.title, post.content)
+                        redirect('/editPost')
+                        }}>EDIT</button>                    
                     </div>
                 )}
 

@@ -6,6 +6,7 @@ import './App.css'
 import { Outlet } from 'react-router-dom';
 
 function App() {
+  const [postData, setPostData]= useState({id: '',title:'', content:''})
   const [auth, setAuth]= useState({
     token: localStorage.getItem("token")|| '',
     user: localStorage.getItem("user")|| null,
@@ -23,10 +24,17 @@ function App() {
 
   
   }
+  const handlePostData =(id, title, content)=>{
+    setPostData({
+      id: id,
+      title: title,
+      content: content
+    })
+  }
   return (
     <>
       <NavBar user={auth.user} logout={onLogout}/>
-      <Outlet  context={{user: auth.user, token: auth.token, onLoginSuccess}}/>
+      <Outlet  context={{user: auth.user, token: auth.token, onLoginSuccess, handlePostData, postData }}/>
 
     </>
   )
