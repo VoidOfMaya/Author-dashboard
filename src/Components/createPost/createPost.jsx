@@ -29,7 +29,7 @@ function CreatePost(){
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
             },
-            body: {title: post.title, content: post.content}
+            body: JSON.stringify({title: post.title, content: post.content})
 
         })
         .then(response=>{
@@ -39,7 +39,7 @@ function CreatePost(){
         return response.json();
         })
         .catch(error => console.error(error))
-        .finally(()=> setIsLoading(true));
+        .finally(()=> setIsLoading(false));
         
     }catch(err){
         console.log(err)
