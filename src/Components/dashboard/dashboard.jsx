@@ -6,9 +6,15 @@ import { PostCard } from "../postCard.jsx/postCard";
 
 function Dashboard(){
     const[loading, setLoading] = useState(true);
+    const[publish, setPublish] = useState();
     const [posts, setPosts] = useState();
-
     const{user, token} = useOutletContext();
+
+    const togglePublish=(status)=>{
+        if(status)return
+        setPublish(!status)
+    }
+
     useEffect(()=>{
         try{
             fetch('https://blog-api-vdtu.onrender.com/post/All',{
@@ -33,11 +39,11 @@ function Dashboard(){
             console.log(err)
         }
 
-    },[])
+    },[publish, token])
     //console.log(posts)
     const populatePosts=(postArray)=>{
         return postArray.map(post=>{
-            return <PostCard key={post.id} post={post}/>
+            return <PostCard key={post.id} post={post} publish={togglePublish}/>
         })
     }
     if(loading){

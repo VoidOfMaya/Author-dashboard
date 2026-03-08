@@ -4,11 +4,11 @@ import { ButtonLoading } from '../loading/load.jsx'
 import { useOutletContext } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-function PostCard({post}){
+function PostCard({post, publish}){
     const [isLoading, setIsLoading] = useState(false)
     const {token} = useOutletContext();
     const redirect = useNavigate();
-    
+
     const reformatDate =(date)=>{
         return new Date(date).toLocaleDateString("en-US", {
             weekday: "short",   // Mon, Tue, ...
@@ -36,7 +36,30 @@ function PostCard({post}){
         .catch(error => console.error(error))
         .finally(()=> {
             setIsLoading(false)
-            redirect('/dashboard')
+
+        });
+        
+    }
+    const deletePost = async(id)=>{
+        const proceed = confirm('this action will delete your post, do you wish to proceed');
+        if(!proceed) return;
+        setIsLoading(true)
+        await fetch(`https://blog-api-vdtu.onrender.com/post/${id}`,{
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        })
+        .then(response=>{
+        if(response.status >= 400) {
+            throw new Error('A server error has occured error code: ' + response.status )
+        }
+        return 'Post, deleted'
+        })
+        .catch(error => console.error(error))
+        .finally(()=> {
+            setIsLoading(false)
 
         });
         
@@ -51,13 +74,13 @@ function PostCard({post}){
                 {!post.isPublished? (
                     <div className={style.pendingOpts}>
                         <button type='button' onClick={()=>onPublish(post.id)}>PUBLISH</button> 
-                        <button type='button'>DELETE</button>
+                        <button type='button' onClick={()=>deletePost(post.id)}>DELETE</button>
                         <button type='button'>EDIT</button>                    
                     </div>
                    
                 ):(
                     <div className={style.publishedOpts}>
-                    <button type='button'>DELETE</button>
+                    <button type='button' onClick={()=>deletePost(post.id)}>DELETE</button>
                     <button type='button'>EDIT</button>                    
                     </div>
                 )}
