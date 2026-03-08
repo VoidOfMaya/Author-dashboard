@@ -14,8 +14,8 @@ const router =createBrowserRouter([
   { path: '/', element:<App />,
     children: [
     { path: '/', element: <LoginPage/>},
-    {path:'/dashboard', element: <Dashboard />},
-    {path:'/createPost', element: <CreatePost/>}
+    {path:'/dashboard', element: <Dashboard />, errorElement: <LoginPage/>},
+    {path:'/createPost', element: <CreatePost/>, errorElement: <LoginPage/>}
 
     ],
     errorElement:<NotFound />},

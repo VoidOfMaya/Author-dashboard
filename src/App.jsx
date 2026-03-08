@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import {NavBar} from './Components/topnav/topnav.jsx'
 
 import './App.css'
@@ -9,15 +10,18 @@ function App() {
     token: localStorage.getItem("token")|| '',
     user: localStorage.getItem("user")|| null,
   });
+  const redirect = useNavigate();
   const onLogout= ()=>{
     localStorage.clear();
     setAuth({token: '', user: null});
+    redirect('/');
     
   }
 
   const onLoginSuccess= (user, token) =>{
-    setAuth({token: token, user: user});
-    
+     setAuth({token: token, user: user});
+
+  
   }
   return (
     <>

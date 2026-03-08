@@ -28,10 +28,12 @@ const ifUser =(user, logout)=>{
     }
 }
 const NavBar = ({user , logout}) =>{
-    const userdata = JSON.parse(user)
+
+    const userData = user     
+ 
     return(
         <div className={style.topnav}>
-            <h1 className={style.title}>DevLog <div className={style.titleRout}>/{user? userdata.firstName : ''}/Dashboard </div></h1>
+            <h1 className={style.title}>DevLog <div className={style.titleRout}>/{user? userData.firstName : ''}/Dashboard </div></h1>
             <div className={style.NavLinks}>
                 {ifUser(user,logout)}
             </div>

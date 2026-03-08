@@ -27,8 +27,8 @@ function LoginPage(){
                 throw new Error('Unauthorized access: user not an Author')
             }
             console.log(data.user.user)
-            onLoginSuccess(data.user.user, data.user.token) 
-            redirectTo("/dashboard")           
+            onLoginSuccess(data.user.user, data.user.token)  
+            redirectTo('/dashboard');
         }catch(err){
             console.log(err)
         }
