@@ -1,10 +1,12 @@
 import { useState } from "react"
 import style from "./login.module.css"
+import { ButtonLoading } from '../loading/load.jsx'
 import { useOutletContext, useNavigate, Link } from "react-router-dom"
 
 function LoginPage(){
     const [emai, setEmail]= useState('')
     const [password, setPassword]= useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const {onLoginSuccess} = useOutletContext();
     const redirectTo = useNavigate();
@@ -12,6 +14,7 @@ function LoginPage(){
     const handleSubmit= async (e) =>{
         e.preventDefault();
         try{
+            setIsLoading(true)
             const res = await fetch('https://blog-api-vdtu.onrender.com/auth/login',{
                 method: 'POST',
                 headers:{
@@ -32,8 +35,8 @@ function LoginPage(){
         }catch(err){
             console.log(err)
         }
-
-
+    
+    setIsLoading(false);
     }
     return(
         <main className={style.loginPage}>
@@ -53,7 +56,16 @@ function LoginPage(){
                            onChange={(e)=>{setPassword(e.target.value)}
                         }
                            ></input>
-                    <button>log in</button>
+                        {isLoading ? (
+                                <>
+                                    <ButtonLoading />
+                                </>
+                            ):(
+                                <>
+                                    <button>log in</button>                                
+                                </>
+                            )}
+
                 </form>
             </div>
         </main>
