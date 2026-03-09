@@ -3,7 +3,7 @@ import { Editor } from '@tinymce/tinymce-react'
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { ButtonLoading } from '../loading/load.jsx'
 function CreatePost(){
-    const { token, user } = useOutletContext();
+    const { token, user, callError } = useOutletContext();
     const [post, setPost]= useState({title: '', content: ''})
     const [submition,setSubmition]= useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -34,18 +34,18 @@ function CreatePost(){
         })
         .then(response=>{
         if(response.status >= 400) {
-            throw new Error('A server error has occured error code: ' + response.status )
+            throw new Error(`${response.status}, ${response.error}`|| `${response.status}, error, could not preform function`)
         }
         return response.json();
         })
-        .catch(error => console.error(error))
+        .catch(error => { throw new Error(error)})
         .finally(()=> {
             setIsLoading(false)
             redirect('/dashboard')
         });
         
     }catch(err){
-        console.log(err)
+        callError(err.message)
     }
     },[submition,])
     return(
