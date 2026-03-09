@@ -8,14 +8,13 @@ function LoginPage(){
     const [emai, setEmail]= useState('')
     const [password, setPassword]= useState('')
     const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
 
-    const {onLoginSuccess} = useOutletContext();
+    const {onLoginSuccess, callError} = useOutletContext();
     const redirectTo = useNavigate();
 
     const handleSubmit= async (e) =>{
         e.preventDefault();
-        setError(null);
+        callError(null);
         try{
             setIsLoading(true)
             const res = await fetch('https://blog-api-vdtu.onrender.com/auth/login',{
@@ -26,12 +25,9 @@ function LoginPage(){
                 body:JSON.stringify({"email": emai, "password": password})
             })
              //handles invalid data if error object is present
-            if(!res.ok){
-                const errData = await res.json()
-                throw new Error (errData.error || "Login failed")
-            }
             const data = await res.json();
-           
+            if(!res.ok) throw new Error ("Login failed")
+
             //handels  valid user thats not an author
              if(data.user.user.roleId === 1){
                 throw new Error("Unauthorized access: user not an Author")
@@ -44,19 +40,10 @@ function LoginPage(){
             redirectTo('/dashboard');
         }catch(err){
             console.log(err)
-            setError(`${err.message}`)
+            callError(err.message)
         }
     
     setIsLoading(false);
-    }
-    const throwError = () =>{
-        if(!error)return
-        return(
-            <>
-                <ErrorMsg message={error} />
-            </>
-        )
-
     }
     return(
         <main className={style.loginPage}>
@@ -88,7 +75,7 @@ function LoginPage(){
 
                 </form>
             </div>
-            {throwError()}
+            {/*throwError()*/}
         </main>
     )
 }

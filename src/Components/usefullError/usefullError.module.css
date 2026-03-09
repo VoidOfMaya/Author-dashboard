@@ -6,8 +6,8 @@
     padding: 20px;
     border-radius: 20px;
     top: 0px;
-    right: 0px;
-    animation: slide-down 3s both
+    justify-self: center;
+    animation: slide-down 4s both
 }
 
 @keyframes slide-down{

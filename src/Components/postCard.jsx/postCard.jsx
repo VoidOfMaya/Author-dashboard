@@ -3,10 +3,12 @@ import { useState } from 'react'
 import { ButtonLoading } from '../loading/load.jsx'
 import { useOutletContext } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { ErrorMsg } from '../usefullError/usefullErr.jsx'
 
-function PostCard({post, publish}){
+function PostCard({post, updateData}){
     const [isLoading, setIsLoading] = useState(false)
-    const {token, handlePostData } = useOutletContext();
+    const {token, handlePostData, callError } = useOutletContext();
+
     const redirect = useNavigate();
 
     const reformatDate =(date)=>{
@@ -20,48 +22,57 @@ function PostCard({post, publish}){
     const onPublish =async (id)=>{
         setIsLoading(true)
         ///publish/:id
-        await fetch(`https://blog-api-vdtu.onrender.com/post/publish/${id}`,{
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-            },
-        })
-        .then(response=>{
-        if(response.status >= 400) {
-            throw new Error('A server error has occured error code: ' + response.status )
-        }
-        return response.json();
-        })
-        .catch(error => console.error(error))
-        .finally(()=> {
-            setIsLoading(false)
+        try{
+            await fetch(`https://blog-api-vdtu.onrender.com/post/publish/${id}`,{
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+            .then(response=>{
+            if(response.status >= 400) {
+                throw new Error(`${response.status}, ${response.error}`|| `${response.status}, error, could not preform function`)
+            }
+            //return response.json();
+            updateData();
+            })
+            .catch(error => {throw new Error(error)})
+            .finally(()=> {
+                setIsLoading(false)
 
-        });
-        
+            });            
+        }catch(err){
+            callError(err.message)
+        }
     }
     const deletePost = async(id)=>{
-        const proceed = confirm('this action will delete your post, do you wish to proceed');
-        if(!proceed) return;
-        setIsLoading(true)
-        await fetch(`https://blog-api-vdtu.onrender.com/post/${id}`,{
-            method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-            },
-        })
-        .then(response=>{
-        if(response.status >= 400) {
-            throw new Error('A server error has occured error code: ' + response.status )
-        }
-        return 'Post, deleted'
-        })
-        .catch(error => console.error(error))
-        .finally(()=> {
-            setIsLoading(false)
+        try{
+            const proceed = confirm('this action will delete your post, do you wish to proceed');
+            if(!proceed) return;
+            setIsLoading(true)
+            await fetch(`https://blog-api-vdtu.onrender.com/post/${id}`,{
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+            .then(response=>{
+            if(response.status >= 400) {
+                throw new Error(`${response.status}, ${response.error}`|| `${response.status}, error, could not preform function`)
+            }
+            updateData();
+            })
+            .catch(error => {throw new Error(error)})
+            .finally(()=> {
+                setIsLoading(false)
 
-        });
+            });            
+        }catch(err){
+            callError(err.message)
+        }
+
         
     }
     return(

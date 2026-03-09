@@ -8,15 +8,15 @@ function Dashboard(){
     const[loading, setLoading] = useState(true);
     const[publish, setPublish] = useState();
     const [posts, setPosts] = useState();
-    const{user, token, authHandler} = useOutletContext();
+    const{user,callError, token, authHandler} = useOutletContext();
     const redirect = useNavigate();
 
     const togglePublish=(status)=>{
         if(status)return
         setPublish(!status)
+        getPosts()
     }
-
-    useEffect(()=>{
+    const getPosts =()=>{
         try{
             fetch('https://blog-api-vdtu.onrender.com/post/All',{
                 method: 'GET',
@@ -26,10 +26,12 @@ function Dashboard(){
                 },
             })
             .then(response=>{
+            
             if(response.status >= 400) {
                 authHandler(response.status)
                 console.log(`a ${response.status} error occured`)
                 redirect('/')
+                throw new Err(`a ${response.status} error occured`)
                 
             }
             return response.json();
@@ -38,14 +40,17 @@ function Dashboard(){
                 setPosts(data.result)
             })
             .catch(error =>{
-                
-               
+                throw new Error(error)       
             } )
             .finally(()=> {setLoading(false)});
         }catch(err){
             console.log(err)
+            callError(err.message)
         }
 
+    }
+    useEffect(()=>{
+        getPosts()
     },[publish, token])
     //console.log(posts)
     const populatePosts=(postArray)=>{
@@ -53,7 +58,7 @@ function Dashboard(){
         if(!postArray) throw new Error('can not access post dashboard');
         */
         return postArray.map(post=>{
-            return <PostCard key={post.id} post={post} publish={togglePublish}/>
+            return <PostCard key={post.id} post={post} updateData={getPosts}/>
         })
         
     }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {NavBar} from './Components/topnav/topnav.jsx'
+import { ErrorMsg } from './Components/usefullError/usefullErr.jsx';
 
 import './App.css'
 import { Outlet } from 'react-router-dom';
@@ -11,7 +12,10 @@ function App() {
     token: localStorage.getItem("token")|| '',
     user: localStorage.getItem("user")|| null,
   });
+  const [error, setError]= useState(null)
+
   const redirect = useNavigate();
+  //user log in log out
   const onLogout= ()=>{
     localStorage.clear();
     setAuth({token: '', user: null});
@@ -30,12 +34,17 @@ function App() {
       setAuth({token: '', user: null})
     }
   }
+  //handells posts
   const handlePostData =(id, title, content)=>{
     setPostData({
       id: id,
       title: title,
       content: content
     })
+  }
+  //handells Errors:
+  const callError =(msg)=>{
+    setError(msg)
   }
   return (
     <>
@@ -47,9 +56,10 @@ function App() {
         handlePostData, 
         postData,
         authHandler, 
+        callError,
         }}/>
 
-
+        {error && <ErrorMsg message={error} />}
     </>
   )
 }
