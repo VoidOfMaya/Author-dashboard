@@ -2,11 +2,13 @@ import { useState } from "react"
 import style from "./login.module.css"
 import { ButtonLoading } from '../loading/load.jsx'
 import { useOutletContext, useNavigate, Link } from "react-router-dom"
+import { Error } from "../usefullError/usefullErr.jsx"
 
 function LoginPage(){
     const [emai, setEmail]= useState('')
     const [password, setPassword]= useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null)
 
     const {onLoginSuccess} = useOutletContext();
     const redirectTo = useNavigate();
@@ -27,16 +29,30 @@ function LoginPage(){
             localStorage.setItem("user", JSON.stringify(data.user.user));
 
             if(data.user.user.roleId === 1){
-                throw new Error('Unauthorized access: user not an Author')
+                localStorage.clear();
+                setError("Unauthorized access: user not an Author")
+                setIsLoading(false);
+                return
+
             }
             console.log(data.user.user)
             onLoginSuccess(data.user.user, data.user.token)  
             redirectTo('/dashboard');
         }catch(err){
             console.log(err)
+            setError(`${err}`)
         }
     
     setIsLoading(false);
+    }
+    const throwError = () =>{
+        if(!error)return
+        return(
+            <>
+                <Error message={error} />
+            </>
+        )
+
     }
     return(
         <main className={style.loginPage}>
@@ -68,6 +84,7 @@ function LoginPage(){
 
                 </form>
             </div>
+            {throwError()}
         </main>
     )
 }

@@ -1,0 +1,31 @@
+.usefullError{
+    background-color: red;
+    color: white;
+    position: absolute;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 20px;
+    top: 0px;
+    right: 0px;
+    animation: slide-down 3s both
+}
+
+@keyframes slide-down{
+ 0%{
+    opacity: 0;
+    transform: translateY(-30);
+ }
+ 20%{ 
+    opacity: 1;
+    transform: translateY(0);
+}
+
+ 80%{
+    opacity: 1;
+    transform: translateY(0);
+}
+ 100%{
+    opacity: 0;
+    transform: translateY(-30);
+ }
+}
