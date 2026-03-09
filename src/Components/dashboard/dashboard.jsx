@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Loading } from "../loading/load";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext, useNavigate } from "react-router-dom";
 import style from './dashboard.module.css'
 import { PostCard } from "../postCard.jsx/postCard";
 
@@ -8,7 +8,8 @@ function Dashboard(){
     const[loading, setLoading] = useState(true);
     const[publish, setPublish] = useState();
     const [posts, setPosts] = useState();
-    const{user, token} = useOutletContext();
+    const{user, token, authHandler} = useOutletContext();
+    const redirect = useNavigate();
 
     const togglePublish=(status)=>{
         if(status)return
@@ -26,14 +27,20 @@ function Dashboard(){
             })
             .then(response=>{
             if(response.status >= 400) {
-                throw new Error('A server error has occured error code: ' + response.status )
+                authHandler(response.status)
+                console.log(`a ${response.status} error occured`)
+                redirect('/')
+                
             }
             return response.json();
             })
             .then( data =>{
                 setPosts(data.result)
             })
-            .catch(error => console.error(error))
+            .catch(error =>{
+                
+               
+            } )
             .finally(()=> {setLoading(false)});
         }catch(err){
             console.log(err)
@@ -42,9 +49,13 @@ function Dashboard(){
     },[publish, token])
     //console.log(posts)
     const populatePosts=(postArray)=>{
+        /*
+        if(!postArray) throw new Error('can not access post dashboard');
+        */
         return postArray.map(post=>{
             return <PostCard key={post.id} post={post} publish={togglePublish}/>
         })
+        
     }
     if(loading){
         return(

@@ -24,6 +24,12 @@ function App() {
 
   
   }
+  const authHandler = (code) =>{
+    if (code === 401){
+      localStorage.clear();
+      setAuth({token: '', user: null})
+    }
+  }
   const handlePostData =(id, title, content)=>{
     setPostData({
       id: id,
@@ -34,7 +40,15 @@ function App() {
   return (
     <>
       <NavBar user={auth.user} logout={onLogout}/>
-      <Outlet  context={{user: auth.user, token: auth.token, onLoginSuccess, handlePostData, postData }}/>
+      <Outlet  context={{
+        user: auth.user, 
+        token: auth.token, 
+        onLoginSuccess, 
+        handlePostData, 
+        postData,
+        authHandler, 
+        }}/>
+
 
     </>
   )

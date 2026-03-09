@@ -3,7 +3,7 @@ import { Editor } from '@tinymce/tinymce-react'
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { ButtonLoading } from '../loading/load.jsx'
 function CreatePost(){
-    const { token } = useOutletContext();
+    const { token, user } = useOutletContext();
     const [post, setPost]= useState({title: '', content: ''})
     const [submition,setSubmition]= useState(false)
     const [isLoading, setIsLoading] = useState(false)
