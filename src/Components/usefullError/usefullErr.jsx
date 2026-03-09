@@ -1,5 +1,5 @@
 import style from './usefullError.module.css'
-const Error = ({message})=>{
+const ErrorMsg = ({message})=>{
     if(message){
         return(
             <div className={style.usefullError}>
@@ -9,5 +9,5 @@ const Error = ({message})=>{
     }
 }
 export{
-    Error
+    ErrorMsg
 }

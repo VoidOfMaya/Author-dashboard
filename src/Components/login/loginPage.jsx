@@ -2,7 +2,7 @@ import { useState } from "react"
 import style from "./login.module.css"
 import { ButtonLoading } from '../loading/load.jsx'
 import { useOutletContext, useNavigate, Link } from "react-router-dom"
-import { Error } from "../usefullError/usefullErr.jsx"
+import { ErrorMsg } from "../usefullError/usefullErr.jsx"
 
 function LoginPage(){
     const [emai, setEmail]= useState('')
@@ -15,6 +15,7 @@ function LoginPage(){
 
     const handleSubmit= async (e) =>{
         e.preventDefault();
+        setError(null);
         try{
             setIsLoading(true)
             const res = await fetch('https://blog-api-vdtu.onrender.com/auth/login',{
@@ -24,23 +25,26 @@ function LoginPage(){
                 },
                 body:JSON.stringify({"email": emai, "password": password})
             })
-            const data = await res.json();
-            localStorage.setItem("token", data.user.token);
-            localStorage.setItem("user", JSON.stringify(data.user.user));
-
-            if(data.user.user.roleId === 1){
-                localStorage.clear();
-                setError("Unauthorized access: user not an Author")
-                setIsLoading(false);
-                return
-
+             //handles invalid data if error object is present
+            if(!res.ok){
+                const errData = await res.json()
+                throw new Error (errData.error || "Login failed")
             }
+            const data = await res.json();
+           
+            //handels  valid user thats not an author
+             if(data.user.user.roleId === 1){
+                throw new Error("Unauthorized access: user not an Author")
+             }
+            localStorage.setItem("token", data.user.token);
+            localStorage.setItem("user", JSON.stringify(data.user.user));                
+
             console.log(data.user.user)
             onLoginSuccess(data.user.user, data.user.token)  
             redirectTo('/dashboard');
         }catch(err){
             console.log(err)
-            setError(`${err}`)
+            setError(`${err.message}`)
         }
     
     setIsLoading(false);
@@ -49,7 +53,7 @@ function LoginPage(){
         if(!error)return
         return(
             <>
-                <Error message={error} />
+                <ErrorMsg message={error} />
             </>
         )
 
