@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { Editor } from '@tinymce/tinymce-react'
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { ButtonLoading } from '../loading/load.jsx'
+import { ButtonLoading } from '../loading/load.jsx';
+import style from './createPost.module.css'
 function CreatePost(){
     const { token, user, callError } = useOutletContext();
     const [post, setPost]= useState({title: '', content: ''})
@@ -55,13 +56,13 @@ function CreatePost(){
                 onChange={(e)=>setPost(prev =>({...prev, title: e.target.value}))}
                 ></input>
             
-                <div style={{marginTop: '2em'}}>
+                <div style={{marginTop: '2em'}} className={style.textEditor}>
                     <Editor
                         apiKey= 'pddw3x1mb6z8a1k4uou87uajvvsuqklkxmhny99spd0h9xbj'
                         onInit={(_evt, editor)=> editRef.current = editor}
                         initialValue="<p>Post content goes here</p>"
                         init={{
-                            height: 1000,
+                            height: 600,
                             menubar:false,
                             plugins:[
                                 'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
@@ -72,7 +73,7 @@ function CreatePost(){
                                 'bold italic forecolor | alignleft aligncenter | font size' +
                                 'alignright alignjusdtify | bullsit numlist outdent indent | ' +
                                 'removeformat | help',
-                            content_style: 'body{ font-family:Helvetica,Arial,sans-serif; font-size:14px}'
+                            content_style: 'body{ font-family:Helvetica,Arial,sans-serif; font-size:16px;}'
                         }}   
                         />
                         {isLoading ? (
@@ -82,6 +83,12 @@ function CreatePost(){
                         ):(
                             <>
                             <button type="button" 
+                            style={{padding: '20px',
+                                    backgroundColor: 'rgb(169, 204, 235)',   
+                                    borderRadius: '20px', 
+                                    width: "fit-content",
+                                    marginTop: '20px',
+                                }}
                             onClick={(e)=>{
                                 e.preventDefault();
                                 log()
