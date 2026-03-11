@@ -22,9 +22,10 @@ function CreatePost(){
     }
     useEffect(()=>{
     if(!submition) return;
+    
     try{
         
-        fetch('https://blog-api-vdtu.onrender.com/post/',{
+        fetch(`${import.meta.VITE_API_URL}/post/`,{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -58,7 +59,7 @@ function CreatePost(){
             
                 <div style={{marginTop: '2em'}} className={style.textEditor}>
                     <Editor
-                        apiKey= 'pddw3x1mb6z8a1k4uou87uajvvsuqklkxmhny99spd0h9xbj'
+                        apiKey={import.meta.env.VITE_EDITOR_KEY}s
                         onInit={(_evt, editor)=> editRef.current = editor}
                         initialValue="<p>Post content goes here</p>"
                         init={{

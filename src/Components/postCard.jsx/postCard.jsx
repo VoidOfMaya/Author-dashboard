@@ -23,7 +23,7 @@ function PostCard({post, updateData}){
         setIsLoading(true)
         ///publish/:id
         try{
-            await fetch(`https://blog-api-vdtu.onrender.com/post/publish/${id}`,{
+            await fetch(`${import.meta.VITE_API_URL}/post/publish/${id}`,{
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function PostCard({post, updateData}){
             const proceed = confirm('this action will delete your post, do you wish to proceed');
             if(!proceed) return;
             setIsLoading(true)
-            await fetch(`https://blog-api-vdtu.onrender.com/post/${id}`,{
+            await fetch(`${import.meta.VITE_API_URL}/post/${id}`,{
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",

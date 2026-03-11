@@ -24,7 +24,7 @@ function EditPost(){
 
     try{
         
-        fetch(`https://blog-api-vdtu.onrender.com/post/update/${postData.id}`,{
+        fetch(`${import.meta.VITE_API_URL}/post/update/${postData.id}`,{
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function EditPost(){
             
                 <div style={{marginTop: '2em'}}>
                     <Editor
-                        apiKey= 'pddw3x1mb6z8a1k4uou87uajvvsuqklkxmhny99spd0h9xbj'
+                        apiKey={import.meta.VITE_EDITOR_KEY}
                         onInit={(_evt, editor)=> editRef.current = editor}
                         initialValue={post.content}
                         init={{

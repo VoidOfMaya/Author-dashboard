@@ -17,7 +17,7 @@ function LoginPage(){
         callError(null);
         try{
             setIsLoading(true)
-            const res = await fetch('https://blog-api-vdtu.onrender.com/auth/login',{
+            const res = await fetch(`${import.meta.VITE_API_URL}/auth/login`,{
                 method: 'POST',
                 headers:{
                     "Content-Type": "application/json",
