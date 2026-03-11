@@ -20,7 +20,7 @@ function Dashboard(){
     //}
     const getPosts =()=>{
         try{
-            fetch(`${import.meta.env.VITE_API_URL}https://blog-api-vdtu.onrender.com/post/All`,{
+            fetch(`${import.meta.env.VITE_API_URL}/post/All`,{
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
