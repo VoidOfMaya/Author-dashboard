@@ -10,7 +10,7 @@ function App() {
   const [postData, setPostData]= useState({id: '',title:'', content:''})
   const [auth, setAuth]= useState({
     token: localStorage.getItem("token")|| '',
-    user: localStorage.getItem("user")|| null,
+    user: JSON.parse(localStorage.getItem("user"))|| null,
   });
   const [error, setError]= useState(null)
 
@@ -25,8 +25,6 @@ function App() {
 
   const onLoginSuccess= (user, token) =>{
      setAuth({token: token, user: user});
-
-  
   }
   const authHandler = (code) =>{
     if (code === 401){

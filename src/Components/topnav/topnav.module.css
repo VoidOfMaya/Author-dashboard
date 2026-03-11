@@ -23,6 +23,9 @@
     display: inline;
     color: rgb(176, 176, 177);
 }
+.navBarLinks{
+    align-items: center;
+}
 .NavLinks{
     display: flex;
     flex: 2;

@@ -7,7 +7,7 @@ const ifUser =(user, logout)=>{
     if(user){
         return(
             
-            <>
+            <div className={style.navBarLinks}>
                 <NavLink to={'/createPost'}>New post</NavLink>
                 <NavLink to={'/dashboard'}>Dashboard</NavLink>
                 <button type='button'
@@ -16,7 +16,7 @@ const ifUser =(user, logout)=>{
                     logout();
                 }}
                 >logout</button>
-            </>
+            </div>
         )
 
     }else{
@@ -27,12 +27,10 @@ const ifUser =(user, logout)=>{
         )            
     }
 }
-const NavBar = ({user , logout}) =>{
-
-    const userData = JSON.parse(user)    
+const NavBar = ({user , logout}) =>{  
     return(
         <div className={style.topnav}>
-            <h1 className={style.title}>DevLog <div className={style.titleRout}>/{user? userData.firstName : ''}/Dashboard </div></h1>
+            <h1 className={style.title}>DevLog <div className={style.titleRout}>/{user? user.firstName : ''}/Dashboard </div></h1>
             <div className={style.NavLinks}>
                 {ifUser(user,logout)}
             </div>

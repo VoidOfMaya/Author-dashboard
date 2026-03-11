@@ -26,7 +26,7 @@ function LoginPage(){
             })
              //handles invalid data if error object is present
             const data = await res.json();
-            if(!res.ok) throw new Error ("Login failed")
+            if(!res.ok) throw new Error ("please enter a valid email and password")
 
             //handels  valid user thats not an author
              if(data.user.user.roleId === 1){
