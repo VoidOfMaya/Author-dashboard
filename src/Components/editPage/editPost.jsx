@@ -24,7 +24,7 @@ function EditPost(){
 
     try{
         
-        fetch(`${import.meta.VITE_API_URL}/post/update/${postData.id}`,{
+        fetch(`${import.meta.env.VITE_API_URL}/post/update/${postData.id}`,{
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",

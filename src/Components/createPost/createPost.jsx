@@ -25,7 +25,7 @@ function CreatePost(){
     
     try{
         
-        fetch(`${import.meta.VITE_API_URL}/post/`,{
+        fetch(`${import.meta.env.VITE_API_URL}/post/`,{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

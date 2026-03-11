@@ -13,11 +13,12 @@ function LoginPage(){
     const redirectTo = useNavigate();
 
     const handleSubmit= async (e) =>{
+
         e.preventDefault();
         callError(null);
         try{
             setIsLoading(true)
-            const res = await fetch(`${import.meta.VITE_API_URL}/auth/login`,{
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`,{
                 method: 'POST',
                 headers:{
                     "Content-Type": "application/json",
