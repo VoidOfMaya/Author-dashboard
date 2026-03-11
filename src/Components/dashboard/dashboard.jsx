@@ -84,7 +84,8 @@ function Dashboard(){
                 {populatePosts(posts)}
             </div>
 
-            <Link to={'/createPost'}>newPost +</Link>
+            <Link to={'/createPost'}
+            className={style.addPost}>newPost +</Link>
         </section>
     )
 }

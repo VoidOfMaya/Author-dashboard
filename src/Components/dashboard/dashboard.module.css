@@ -29,3 +29,6 @@
 .opts{
  grid-area: opts;
 }
+.addPost{
+    padding: 20px;
+}

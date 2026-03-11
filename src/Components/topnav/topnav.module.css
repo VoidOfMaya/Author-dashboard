@@ -23,6 +23,20 @@
     display: inline;
     color: rgb(176, 176, 177);
 }
+.menuToggle {
+    display: flex;
+    justify-content: flex-end;  
+    align-items: center;
+    width: 100%;                
+}
+.menuIcon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    width: fit-content;
+    justify-self: end;
+          
+}
 .navBarLinks{
     display: grid;
     grid-template: 1fr/ 1fr 1fr 1fr;
@@ -45,4 +59,24 @@
     background-color:rgb(238, 236, 236) ;
     transform: scale(1.2);
     z-index: 1;
+}
+
+.isPhone{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(238, 236, 236);
+    position: absolute;
+    top: 82px;
+    left: 0px;
+    z-index: 1;
+
+}
+.isDesk{
+    display: flex;
+
+}
+@media (max-width: 768px){
+    .title{
+        align-self: center;
+    }
 }
