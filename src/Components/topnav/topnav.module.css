@@ -24,7 +24,9 @@
     color: rgb(176, 176, 177);
 }
 .navBarLinks{
-    align-items: center;
+    display: grid;
+    grid-template: 1fr/ 1fr 1fr 1fr;
+    align-self: center;
 }
 .NavLinks{
     display: flex;
