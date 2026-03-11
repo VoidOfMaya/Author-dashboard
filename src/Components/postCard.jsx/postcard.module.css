@@ -14,12 +14,15 @@
 }
 .id{
  grid-area: id;
+ border-right: 1px solid black;
 }
 .name{
  grid-area: name;
+  border-right: 1px solid black;
 }
 .creation{
  grid-area: creation;
+  border-right: 1px solid black;
 }
 .published{
  grid-area: published;
@@ -55,10 +58,11 @@
 }
 .pendingOpts button{
     padding: 20px;
-    color: rgb(176, 176, 177);
+    color: rgb(121, 121, 121);
     border-left: 1px solid rgb(176, 176, 177);
     transform: scale(1);
     transition: transform .2s ease;
+    background-color: rgb(248, 248, 248);
 }
 .pendingOpts button:hover{
     color: black;
@@ -66,5 +70,22 @@
     background-color: white;
     transform: scaleX(1.1);
     z-index: 1;
+}
+@media (max-width: 768px) {
+    .id{
+        display: none;
+    }
+    .tableItem{
+        display: grid;
+        grid-template-columns:  2fr 2fr 2fr ;
+        grid-template-rows: 1fr 1fr;
+
+        grid-template-areas:
+        ' name creation published .' 
+        ' opts opts opts opts'
+        ;
+        align-items: center;
+
+    }
 }
 

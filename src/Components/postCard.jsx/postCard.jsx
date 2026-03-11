@@ -84,22 +84,38 @@ function PostCard({post, updateData}){
             <div className={style.opts}>
                 {!post.isPublished? (
                     <div className={style.pendingOpts}>
-                        <button type='button' onClick={()=>onPublish(post.id)}>PUBLISH</button> 
-                        <button type='button' onClick={()=>deletePost(post.id)}>DELETE</button>
-                        <button type='button' onClick={()=>{
-                            handlePostData(post.id, post.title, post.content)
-                            redirect('/editPost')
-                            }
+                        <button type='button' 
+                                style={{backgroundColor: "green", color: 'white'}} 
+                                onClick={()=>onPublish(post.id)}>PUBLISH</button> 
+
+                        <button type='button' 
+                                style={{backgroundColor: "red", color: 'white'}} 
+                                onClick={()=>deletePost(post.id)}>DELETE</button>
+
+                        <button type='button' 
+                                style={{backgroundColor: "orange", color: 'white'}} 
+                                onClick={()=>{
+                                    handlePostData(post.id, post.title, post.content)
+                                    redirect('/editPost')
+                                }
                         }>EDIT</button>                    
                     </div>
                    
                 ):(
                     <div className={style.publishedOpts}>
-                    <button type='button' onClick={()=>deletePost(post.id)}>DELETE</button>
-                    <button type='button'onClick={()=>{
-                        handlePostData(post.id, post.title, post.content)
-                        redirect('/editPost')
-                        }}>EDIT</button>                    
+                    <button type='button' 
+                            style={{backgroundColor: "red", color: 'white'}} 
+                            onClick={()=>deletePost(post.id)}>
+                                DELETE
+                    </button>
+
+                    <button type='button' 
+                            style={{backgroundColor: "orange", color: 'white'}} 
+                            onClick={()=>{
+                                handlePostData(post.id, post.title, post.content)
+                                redirect('/editPost')
+                            }
+                    }> EDIT</button>                    
                     </div>
                 )}
 

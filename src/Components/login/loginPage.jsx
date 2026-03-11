@@ -68,7 +68,7 @@ function LoginPage(){
                                 </>
                             ):(
                                 <>
-                                    <button>log in</button>                                
+                                    <button style={{padding: '20px', width: 'fit-content', borderRadius: '20px'}}>log in</button>                                
                                 </>
                             )}
 

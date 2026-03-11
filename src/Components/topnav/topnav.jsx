@@ -11,6 +11,7 @@ const ifUser =(user, logout, state)=>{
              <div className={state? style.isPhone: style.isDesk}>
                 <NavLink to={'/createPost'}>New post</NavLink>
                 <NavLink to={'/dashboard'}>Dashboard</NavLink>
+                <NavLink><a href='https://the-devlog.netlify.app/'>Devlog</a></NavLink>
                 <NavLink type='button'
                 onClick={e=>{
                     e.preventDefault();

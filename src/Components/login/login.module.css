@@ -17,3 +17,9 @@ input{
     border-radius: 5px;
     background-color: rgb(243, 243, 243);
 }
+@media (max-width: 768px) {
+    .loginContainer{
+        outline: none;
+    }
+    
+}

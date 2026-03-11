@@ -32,3 +32,25 @@
 .addPost{
     padding: 20px;
 }
+@media (max-width: 768px) {
+    .id{
+        display: none;
+    }
+    .name{
+        border-right: 1px solid black;
+    }
+    .creation{
+        border-right: 1px solid black;
+    }    
+    .published{
+        
+    }
+    .tableHeaders{
+    grid-template-columns: 2fr 2fr 2fr;
+    grid-template-rows: 1fr auto-fill;
+
+    grid-template-areas:
+    'name creation published' 
+    ;
+}
+}

@@ -8,14 +8,16 @@ function Dashboard(){
     const[loading, setLoading] = useState(true);
     const[publish, setPublish] = useState();
     const [posts, setPosts] = useState();
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
     const{user,callError, token, authHandler} = useOutletContext();
     const redirect = useNavigate();
 
-    const togglePublish=(status)=>{
-        if(status)return
-        setPublish(!status)
-        getPosts()
-    }
+    //const togglePublish=(status)=>{
+    //    if(status)return
+    //    setPublish(!status)
+    //    getPosts()
+    //}
     const getPosts =()=>{
         try{
             fetch('https://blog-api-vdtu.onrender.com/post/All',{
@@ -51,6 +53,7 @@ function Dashboard(){
     }
     useEffect(()=>{
         getPosts()
+
     },[publish, token])
     //console.log(posts)
     const populatePosts=(postArray)=>{
@@ -70,6 +73,7 @@ function Dashboard(){
             </div>
         )
     }
+
     return(
         <section>
             <h1>Posts:</h1>
@@ -79,7 +83,8 @@ function Dashboard(){
                     <div className={style.name}>NAME</div>
                     <div className={style.creation}>CREATED AT</div>
                     <div className={style.published}>PUBLISH STATUS</div>
-                    <div className={style.opts}>OPTIONS</div>
+                    {window.innerWidth <= 768? (<></>):(<div className={style.opts}>OPTIONS</div>)}
+                    
                 </div>
                 {populatePosts(posts)}
             </div>
