@@ -58,7 +58,7 @@ function EditPost(){
             
                 <div style={{marginTop: '2em'}}>
                     <Editor
-                        apiKey={import.meta.VITE_EDITOR_KEY}
+                        apiKey={import.meta.env.VITE_EDITOR_KEY}
                         onInit={(_evt, editor)=> editRef.current = editor}
                         initialValue={post.content}
                         init={{
